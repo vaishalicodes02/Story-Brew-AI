@@ -2,6 +2,8 @@ import streamlit as st
 import time
 import random
 
+st.session_state["logged_in"] = True
+
 # Configure page
 st.set_page_config(
     page_title="Story Brew AI - Create Amazing Web Series Stories",
@@ -399,15 +401,13 @@ with col2:
 
 # Generate button
 if st.button("🚀 Generate Story", key="generate"):
-    with st.spinner("Brewing your story... ☕"):
-        time.sleep(2)  # Simulate processing
 
-    st.markdown('<div class="success">🎉 Story Generated Successfully!</div>', unsafe_allow_html=True)
-
-    # Characters section
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.header("👥 Characters")
-
+    # Save inputs for Script Generator page
+    st.session_state["video_title"] = title
+    st.session_state["genre"] = genre
+    st.session_state["story"] = premise
+    st.session_state["duration"] = episodes
+    st.session_state["audience"] = target_audience
     # Character data
     characters = [
         {"icon": "🦸", "name": "The Protagonist", "desc": "A passionate creator with big dreams and endless determination."},
