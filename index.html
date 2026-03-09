@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Brew AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🎬 Story Brew AI</h1>
+        <p class="subtitle">✨ Generate captivating YouTube Web Series Stories with AI magic ✨</p>
+
+        <form id="storyForm">
+            <div class="form-section">
+                <div class="form-group">
+                    <h3>📝 Story Details</h3>
+                    <label for="title">Series Title</label>
+                    <input type="text" id="title" placeholder="Enter your series title..." required>
+
+                    <label for="genre">🎭 Select Genre</label>
+                    <select id="genre" required>
+                        <option value="">Choose a genre...</option>
+                        <option value="comedy">🎭 Comedy</option>
+                        <option value="drama">🎭 Drama</option>
+                        <option value="sci-fi">🚀 Sci-Fi</option>
+                        <option value="thriller">🔪 Thriller</option>
+                        <option value="fantasy">🧙 Fantasy</option>
+                    </select>
+
+                    <label for="premise">💡 Enter your story idea</label>
+                    <textarea id="premise" placeholder="Describe your story premise..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <h3>⚙️ Configuration</h3>
+                    <div class="slider-container">
+                        <label for="episodes">📺 Number of Episodes: <span id="episodesValue" class="slider-value">5</span></label>
+                        <input type="range" id="episodes" class="slider" min="1" max="10" value="5">
+                    </div>
+
+                    <h3>🎯 Story Elements</h3>
+                    <label for="tone">🎨 Tone</label>
+                    <select id="tone" required>
+                        <option value="">Choose a tone...</option>
+                        <option value="light">Light-hearted</option>
+                        <option value="dark">Dark</option>
+                        <option value="inspirational">Inspirational</option>
+                        <option value="humorous">Humorous</option>
+                        <option value="suspenseful">Suspenseful</option>
+                    </select>
+
+                    <label for="audience">👥 Target Audience</label>
+                    <select id="audience" required>
+                        <option value="">Choose audience...</option>
+                        <option value="teens">Teens</option>
+                        <option value="young-adults">Young Adults</option>
+                        <option value="adults">Adults</option>
+                        <option value="family">Family</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">🚀 Generate Story</button>
+        </form>
+
+        <div class="spinner" id="spinner">
+            <p>Brewing your story... ☕</p>
+        </div>
+
+        <div id="results" style="display: none;">
+            <div class="success">🎉 Story Generated Successfully!</div>
+
+            <div class="card">
+                <h2 class="section-header">👥 Characters</h2>
+                <div class="characters">
+                    <div class="character-card">
+                        <h4>🦸 Hero</h4>
+                        <p>A passionate creator trying to build a web series.</p>
+                    </div>
+                    <div class="character-card">
+                        <h4>👫 Friend</h4>
+                        <p>Supports the hero with crazy ideas.</p>
+                    </div>
+                    <div class="character-card">
+                        <h4>😈 Rival Creator</h4>
+                        <p>Competes for views and attention.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-header">📋 Episode Outline</h2>
+                <ul class="episode-list" id="episodeList"></ul>
+            </div>
+
+            <div class="card">
+                <h2 class="section-header">🎬 Pilot Episode</h2>
+                <p>🌅 The story begins in a small studio where the creator decides to build a YouTube series. With determination and creativity, they embark on an exciting journey filled with challenges, friendships, and unexpected discoveries. The first episode sets the stage for an epic adventure that will captivate audiences worldwide! ✨</p>
+            </div>
+
+            <div class="card">
+                <h2 class="section-header">🎨 Story Insights</h2>
+                <div class="insights">
+                    <div class="insight-item">
+                        <strong>📊 Genre Fit:</strong> High
+                    </div>
+                    <div class="insight-item">
+                        <strong>🎯 Audience Appeal:</strong> Excellent
+                    </div>
+                    <div class="insight-item">
+                        <strong>⏱️ Episode Length:</strong> 8-12 minutes
+                    </div>
+                    <div class="insight-item">
+                        <strong>📈 Viral Potential:</strong> High
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update slider value display
+        const episodesSlider = document.getElementById('episodes');
+        const episodesValue = document.getElementById('episodesValue');
+
+        episodesSlider.addEventListener('input', function() {
+            episodesValue.textContent = this.value;
+        });
+
+        // Form submission
+        const form = document.getElementById('storyForm');
+        const spinner = document.getElementById('spinner');
+        const results = document.getElementById('results');
+        const episodeList = document.getElementById('episodeList');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Show spinner
+            spinner.classList.add('show');
+            results.style.display = 'none';
+
+            // Simulate processing time
+            setTimeout(() => {
+                // Hide spinner
+                spinner.classList.remove('show');
+
+                // Generate episode list
+                const episodes = parseInt(episodesSlider.value);
+                episodeList.innerHTML = '';
+
+                for (let i = 1; i <= episodes; i++) {
+                    const episodeText = i % 2 === 0
+                        ? `🌟 The journey continues with unexpected challenges and plot twists.`
+                        : `🎬 New adventures unfold as characters face their destinies.`;
+
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>Episode ${i}:</strong> ${episodeText}`;
+                    episodeList.appendChild(li);
+                }
+
+                // Show results
+                results.style.display = 'block';
+
+                // Scroll to results
+                results.scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
