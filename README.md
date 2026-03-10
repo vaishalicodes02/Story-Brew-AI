@@ -6,7 +6,43 @@ Login:
 username : creator
 <br>
 password : 1234
-
-
+<br><br>
+📌 Problem Statement
+<br>
+Content creators and filmmakers spend significant time in the pre-production stage creating:
+<br>
+Screenplays
+<br>
+Character profiles
+<br>
+Scene breakdowns
+<br>
+Sound design plans
+<br>
+Many creators lack access to professional scriptwriting tools, which leads to:
+<br>
+Slow script development
+<br>
+Inconsistent storytelling
+<br>
+High production planning effort
+<br>
+Difficulty maintaining screenplay structure
+<br>
+Therefore, a smart system is required that can automatically generate structured film scripts and supporting materials from a simple story idea.
+<br><br>
+Story Brew AI uses Generative AI to automatically generate film pre-production materials.
+<br>
+Users simply enter a story idea or concept, and the system generates:
+<br>
+🎬 Structured screenplay
+<br>
+👤 Character profiles
+<br>
+🎧 Sound design suggestions
+<>br
+📖 Scene breakdown
+<br>
+The generated content can also be downloaded in multiple formats for easy use.
 
     
