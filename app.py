@@ -9,7 +9,7 @@ st.set_page_config(
     page_title="Story Brew AI - Create Amazing Web Series Stories",
     page_icon="🎬",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # Custom CSS for modern dark theme
@@ -21,6 +21,12 @@ st.markdown("""
     /* Global styles */
     * {
         font-family: 'Poppins', sans-serif !important;
+    }
+
+    /* ============ SIDEBAR STYLING ============ */
+    [data-testid="stSidebar"] {
+        background: rgba(20, 20, 40, 0.9) !important;
+        border-right: 1px solid rgba(102, 126, 234, 0.2) !important;
     }
 
     /* Main background with animated gradient */
@@ -366,9 +372,101 @@ st.markdown("""
         .card {
             padding: 1.5rem !important;
         }
+
+        /* Sidebar responsive */
+        [data-testid="stSidebar"] {
+            width: 100% !important;
+        }
+
+        .sidebar-header {
+            padding: 20px 16px !important;
+            margin-bottom: 15px !important;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem !important;
+        }
+
+        .sidebar-section {
+            padding: 14px !important;
+            margin-bottom: 12px !important;
+        }
+
+        [data-testid="stSidebar"] .stButton > button {
+            padding: 12px 14px !important;
+            font-size: 0.9rem !important;
+            margin-bottom: 8px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .title {
+            font-size: 2rem !important;
+        }
+
+        .subtitle {
+            font-size: 0.9rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        .sidebar-header {
+            padding: 16px 12px !important;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.3rem !important;
+        }
+
+        .sidebar-header p {
+            font-size: 0.75rem !important;
+        }
+
+        [data-testid="stSidebar"] .stButton > button {
+            padding: 10px 12px !important;
+            font-size: 0.85rem !important;
+            margin-bottom: 6px !important;
+        }
+
+        .sidebar-section {
+            padding: 12px !important;
+            font-size: 0.8rem !important;
+        }
+
+        .sidebar-section h3 {
+            font-size: 0.85rem !important;
+            margin-bottom: 10px !important;
+        }
+
+        .sidebar-section p {
+            font-size: 0.8rem !important;
+        }
+
+        .sidebar-footer {
+            padding: 10px !important;
+            margin-top: 15px !important;
+        }
+
+        .sidebar-footer p {
+            font-size: 0.7rem !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
+
+# ============ SIDEBAR NAVIGATION ============
+with st.sidebar:
+    # Simple sidebar header
+    st.markdown("""
+    <div style="text-align: center; padding: 20px;">
+        <h2>🎬 Story Brew AI</h2>
+        <p>Creator Studio</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Basic navigation
+    st.page_link("pages/dashboard.py", label="🏠 Dashboard", icon="🏠")
+    st.page_link("pages/login.py", label="🔐 Login", icon="🔐")
+    st.page_link("pages/scriptgenerator.py", label="🎬 Script Generator", icon="🎬")
 
 # Custom title
 st.markdown('<h1 class="title">🎬 Story Brew AI</h1>', unsafe_allow_html=True)
