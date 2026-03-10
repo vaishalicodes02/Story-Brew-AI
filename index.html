@@ -1,312 +1,489 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Story Brew AI - Create Amazing Web Series Stories</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
-    <meta name="description" content="Generate captivating YouTube web series stories with AI magic. Create unique storylines, characters, and episode outlines for your next viral series.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story-Brew-AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c10;
+  --s1: #0e1420;
+  --s2: #131b28;
+  --s3: #1a2235;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --teal: #00d4aa;
+  --blue: #4f9cf9;
+  --purple: #a855f7;
+  --amber: #f59e0b;
+  --rose: #f43f5e;
+  --green: #22c55e;
+  --text: #f0f4f8;
+  --muted: #7a8a9e;
+  --r: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content:'';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 10%, rgba(0,212,170,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 90% 90%, rgba(79,156,249,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(168,85,247,0.04) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+header {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 52px 20px 36px;
+  border-bottom: 1px solid var(--border);
+}
+.header-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,212,170,0.1);
+  border: 1px solid rgba(0,212,170,0.25);
+  border-radius: 100px; padding: 6px 18px;
+  font-size: 0.72rem; color: var(--teal);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 18px;
+}
+header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15; margin-bottom: 10px;
+}
+header h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+header p { color: var(--muted); font-size: 1rem; }
+.main-wrap {
+  position: relative; z-index: 1;
+  max-width: 1180px; margin: 0 auto;
+  padding: 36px 20px 80px;
+}
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 22px; margin-bottom: 22px;
+}
+@media(max-width:700px){ .form-grid { grid-template-columns:1fr; } }
+.card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 26px;
+  position: relative; overflow: hidden;
+}
+.card::after {
+  content:''; position: absolute;
+  top:0; left:0; right:0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.76rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--teal);
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 22px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.field { margin-bottom: 16px; }
+.field:last-of-type { margin-bottom: 0; }
+label {
+  display: block; font-size: 0.76rem; font-weight: 500;
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.09em; margin-bottom: 7px;
+}
+input[type=text], textarea, select {
+  width: 100%; background: var(--s2);
+  border: 1px solid var(--border2); border-radius: var(--r);
+  color: var(--text); font-family: 'DM Sans', sans-serif;
+  font-size: 0.96rem; padding: 13px 16px; outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+  -webkit-appearance: none; appearance: none;
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%237a8a9e' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 38px; cursor: pointer;
+}
+select option { background: #131b28; color: #f0f4f8; }
+select option:disabled { color: #7a8a9e; }
+input[type=text]:focus, textarea:focus, select:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(0,212,170,0.12);
+  background: var(--s3);
+}
+textarea { resize: vertical; min-height: 108px; line-height: 1.65; }
+.slider-row { display: flex; align-items: center; gap: 14px; }
+input[type=range] {
+  flex: 1; -webkit-appearance: none; appearance: none;
+  height: 5px; border-radius: 3px; outline: none; cursor: pointer;
+  background: linear-gradient(to right, var(--teal) 0%, var(--teal) var(--pct,40%), rgba(255,255,255,0.1) var(--pct,40%));
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--teal);
+  border: 2px solid var(--bg); box-shadow: 0 0 8px rgba(0,212,170,0.55);
+  cursor: pointer; transition: transform .15s;
+}
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.slider-num {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800;
+  color: var(--amber); min-width: 28px; text-align: center;
+}
+.btn-gen {
+  width: 100%; padding: 17px;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 100%);
+  border: none; border-radius: var(--r); color: #fff;
+  font-family: 'Syne', sans-serif; font-size: 0.94rem; font-weight: 700;
+  letter-spacing: 0.13em; text-transform: uppercase; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 6px 28px rgba(0,212,170,0.3);
+  transition: opacity .2s, transform .15s, box-shadow .2s;
+  margin-top: 10px;
+}
+.btn-gen:hover:not(:disabled) {
+  opacity:.9; transform:translateY(-2px);
+  box-shadow: 0 10px 36px rgba(0,212,170,0.42);
+}
+.btn-gen:active:not(:disabled) { transform: translateY(0); }
+.btn-gen:disabled { opacity:.38; cursor:not-allowed; transform:none; }
+.loading-wrap { display:none; text-align:center; padding: 80px 20px; }
+.loading-wrap.show { display: block; }
+.spinner {
+  width: 48px; height: 48px;
+  border: 3px solid rgba(0,212,170,0.15);
+  border-top-color: var(--teal); border-radius: 50%;
+  animation: spin .8s linear infinite; margin: 0 auto 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family:'Syne',sans-serif; font-size:1.05rem; color:var(--muted); letter-spacing:0.06em; }
+.loading-dots::after {
+  content:''; animation: dots 1.5s steps(4,end) infinite;
+}
+@keyframes dots {
+  0%  { content:''; } 25%{ content:'.'; } 50%{ content:'..'; } 75%{ content:'...'; }
+}
+.success-banner {
+  display: none;
+  background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(0,212,170,0.12));
+  border: 1px solid rgba(34,197,94,0.3); border-radius: var(--r);
+  padding: 16px 22px; text-align: center;
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  color: var(--green); letter-spacing: 0.06em;
+  margin-bottom: 28px; animation: fadeDown .5s ease;
+}
+.success-banner.show { display: block; }
+@keyframes fadeDown {
+  from { opacity:0; transform:translateY(-12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+#output { display:none; }
+#output.show { display:block; }
+.section { margin-bottom: 24px; }
+.section-head {
+  display:flex; align-items:center; gap:10px;
+  font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:800;
+  color:var(--text); margin-bottom:16px;
+}
+.section-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--teal); box-shadow:0 0 8px var(--teal); flex-shrink:0;
+}
+.chars-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; }
+.char-card {
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--r); padding:22px 16px; text-align:center;
+  opacity:0; transform:translateY(16px);
+  transition:opacity .45s, transform .45s, border-color .2s;
+}
+.char-card.show { opacity:1; transform:translateY(0); }
+.char-card:hover { border-color:rgba(0,212,170,0.3); transform:translateY(-3px); }
+.char-emoji { font-size:2.4rem; margin-bottom:10px; display:block; }
+.char-name { font-family:'Syne',sans-serif; font-size:0.86rem; font-weight:700; color:var(--teal); margin-bottom:7px; }
+.char-desc { font-size:0.82rem; color:var(--muted); line-height:1.55; }
+.ep-list { display:flex; flex-direction:column; gap:10px; }
+.ep-item {
+  background:var(--s2); border:1px solid var(--border);
+  border-left:3px solid var(--blue); border-radius:var(--r);
+  padding:15px 20px; display:flex; gap:16px; align-items:flex-start;
+  opacity:0; transform:translateX(-14px);
+  transition:opacity .4s, transform .4s;
+}
+.ep-item.show { opacity:1; transform:translateX(0); }
+.ep-badge {
+  flex-shrink:0;
+  background:rgba(79,156,249,0.12); border:1px solid rgba(79,156,249,0.25);
+  border-radius:7px; padding:4px 10px;
+  font-family:'Syne',sans-serif; font-size:0.7rem; font-weight:700;
+  color:var(--blue); white-space:nowrap; margin-top:2px;
+}
+.ep-title-txt { font-family:'Syne',sans-serif; font-size:0.88rem; font-weight:700; color:var(--text); margin-bottom:5px; }
+.ep-summary-txt { font-size:0.84rem; color:var(--muted); line-height:1.6; }
+.pilot-box { background:var(--s2); border:1px solid var(--border); border-radius:var(--r); padding:22px 24px; }
+.pilot-para {
+  font-size:0.94rem; color:var(--muted); line-height:1.8;
+  padding-left:16px; border-left:2px solid var(--amber); margin-bottom:14px;
+}
+.pilot-para:last-child { margin-bottom:0; }
+.insights-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:12px; }
+.insight-card {
+  background:var(--s2); border:1px solid var(--border); border-radius:var(--r);
+  padding:20px 14px; text-align:center;
+  opacity:0; transform:scale(.93); transition:opacity .4s, transform .4s;
+}
+.insight-card.show { opacity:1; transform:scale(1); }
+.insight-icon { font-size:1.9rem; margin-bottom:9px; display:block; }
+.insight-label { font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.09em; margin-bottom:6px; }
+.insight-value { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:800; }
+.c-teal   { color:var(--teal); }
+.c-blue   { color:var(--blue); }
+.c-amber  { color:var(--amber); }
+.c-purple { color:var(--purple); }
+.c-green  { color:var(--green); }
+.c-rose   { color:var(--rose); }
+.analytics-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+@media(max-width:500px){ .analytics-grid { grid-template-columns:1fr; } }
+.analytics-card {
+  background:var(--s2); border:1px solid var(--border); border-radius:var(--r);
+  padding:26px 16px; text-align:center;
+  opacity:0; transform:translateY(12px); transition:opacity .4s, transform .4s;
+}
+.analytics-card.show { opacity:1; transform:translateY(0); }
+.analytics-label { font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.09em; margin-bottom:12px; }
+.analytics-value { font-family:'Syne',sans-serif; font-size:1.75rem; font-weight:800; color:var(--rose); }
+.error-box {
+  background:rgba(244,63,94,0.08); border:1px solid rgba(244,63,94,0.3);
+  border-radius:var(--r); padding:16px 20px; color:var(--rose); font-size:0.92rem;
+}
+.btn-reset {
+  display:flex; align-items:center; gap:8px;
+  margin: 0 auto 28px; padding:11px 26px;
+  background:transparent; border:1px solid var(--border2);
+  border-radius:var(--r); color:var(--muted);
+  font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:600;
+  letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;
+  transition:border-color .2s, color .2s;
+}
+.btn-reset:hover { border-color:var(--teal); color:var(--teal); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:3px; }
+</style>
 </head>
 <body>
-    <div class="background"></div>
 
-    <div class="container">
-        <header>
-            <h1>🎬 Story Brew AI</h1>
-            <p>✨ Generate captivating YouTube web series stories with AI magic ✨</p>
-        </header>
+<header>
+  <div class="header-badge">✦ AI-Powered Creator</div>
+  <h1>Story-Brew-<em>AI</em></h1>
+  <p>Fill in your story details and let AI craft your complete series</p>
+</header>
 
-        <div class="card">
-            <h2>📝 Create Your Story</h2>
+<div class="main-wrap">
 
-            <form id="storyForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="title">🎯 Series Title</label>
-                        <input type="text" id="title" placeholder="Enter your series title..." required>
-                    </div>
+  <div id="formSection">
+    <div class="form-grid">
 
-                    <div class="form-group">
-                        <label for="genre">🎭 Select Genre</label>
-                        <select id="genre" required>
-                            <option value="">Choose a genre...</option>
-                            <option value="comedy">🎭 Comedy</option>
-                            <option value="drama">🎭 Drama</option>
-                            <option value="sci-fi">🚀 Sci-Fi</option>
-                            <option value="thriller">🔪 Thriller</option>
-                            <option value="fantasy">🧙 Fantasy</option>
-                            <option value="romance">💕 Romance</option>
-                            <option value="mystery">🔍 Mystery</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="premise">💡 Story Premise</label>
-                    <textarea id="premise" placeholder="Describe your story idea, main conflict, and key themes..." required></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="episodes">📺 Number of Episodes</label>
-                        <input type="number" id="episodes" min="1" max="20" value="5" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tone">🎨 Story Tone</label>
-                        <select id="tone" required>
-                            <option value="">Choose a tone...</option>
-                            <option value="light">Light-hearted</option>
-                            <option value="dark">Dark & Intense</option>
-                            <option value="inspirational">Inspirational</option>
-                            <option value="humorous">Humorous</option>
-                            <option value="suspenseful">Suspenseful</option>
-                            <option value="dramatic">Dramatic</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="audience">👥 Target Audience</label>
-                        <select id="audience" required>
-                            <option value="">Choose audience...</option>
-                            <option value="teens">👦 Teens (13-19)</option>
-                            <option value="young-adults">👨‍💼 Young Adults (20-35)</option>
-                            <option value="adults">🧑 Adults (35+)</option>
-                            <option value="family">👨‍👩‍👧‍👦 Family Friendly</option>
-                            <option value="kids">🧒 Kids (8-12)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="platform">📱 Platform Style</label>
-                        <select id="platform" required>
-                            <option value="">Choose platform...</option>
-                            <option value="youtube">📺 YouTube Series</option>
-                            <option value="netflix">🎬 Netflix Style</option>
-                            <option value="tiktok">📱 TikTok Series</option>
-                            <option value="instagram">📸 Instagram Reels</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button type="submit" class="generate-btn">
-                    <span class="btn-text">🚀 Generate Story</span>
-                    <span class="btn-loading" style="display: none;">⚡ Brewing...</span>
-                </button>
-            </form>
+      <div class="card">
+        <div class="card-title">📖 Story Details</div>
+        <div class="field">
+          <label>🎬 Series Title</label>
+          <input type="text" id="seriesTitle" placeholder="Enter your series title…">
         </div>
-
-        <div class="loading-spinner" id="spinner" style="display: none;">
-            <div class="spinner-content">
-                <div class="spinner"></div>
-                <p>Brewing your story... ☕</p>
-            </div>
+        <div class="field">
+          <label>🎭 Select Genre</label>
+          <select id="genre">
+            <option value="" disabled selected>— Choose a genre —</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Mystery / Thriller">Mystery / Thriller</option>
+            <option value="Romance">Romance</option>
+            <option value="Horror">Horror</option>
+            <option value="Historical Fiction">Historical Fiction</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Drama">Drama</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Crime">Crime</option>
+          </select>
         </div>
-
-        <div class="results" id="results" style="display: none;">
-            <div class="success-message">
-                🎉 Story Generated Successfully!
-            </div>
-
-            <div class="result-card">
-                <h2>👥 Characters</h2>
-                <div class="characters-grid">
-                    <div class="character-card">
-                        <div class="character-icon">🦸</div>
-                        <h3>The Protagonist</h3>
-                        <p>A passionate creator with big dreams and endless determination.</p>
-                    </div>
-                    <div class="character-card">
-                        <div class="character-icon">👫</div>
-                        <h3>The Best Friend</h3>
-                        <p>Loyal companion who provides comic relief and moral support.</p>
-                    </div>
-                    <div class="character-card">
-                        <div class="character-icon">😈</div>
-                        <h3>The Antagonist</h3>
-                        <p>Formidable rival who challenges the protagonist's journey.</p>
-                    </div>
-                    <div class="character-card">
-                        <div class="character-icon">🧙</div>
-                        <h3>The Mentor</h3>
-                        <p>Wise guide who offers crucial advice and perspective.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-card">
-                <h2>📋 Episode Outline</h2>
-                <div class="episodes-list" id="episodesList">
-                    <!-- Episodes will be generated here -->
-                </div>
-            </div>
-
-            <div class="result-card">
-                <h2>🎬 Pilot Episode Summary</h2>
-                <div class="pilot-summary">
-                    <p>🌅 The story begins in a bustling creative hub where our protagonist discovers their passion for storytelling. With limited resources but unlimited ambition, they embark on an extraordinary journey filled with unexpected alliances, thrilling challenges, and life-changing discoveries.</p>
-                    <p>🎯 The first episode establishes the core conflict, introduces key characters, and sets up the overarching narrative that will captivate audiences throughout the series.</p>
-                </div>
-            </div>
-
-            <div class="result-card">
-                <h2>🎨 Story Insights</h2>
-                <div class="insights-grid">
-                    <div class="insight-card">
-                        <div class="insight-icon">📊</div>
-                        <h4>Genre Fit</h4>
-                        <span class="insight-value">Excellent</span>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">🎯</div>
-                        <h4>Audience Appeal</h4>
-                        <span class="insight-value">High</span>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">⏱️</div>
-                        <h4>Episode Length</h4>
-                        <span class="insight-value">8-12 min</span>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">📈</div>
-                        <h4>Viral Potential</h4>
-                        <span class="insight-value">Very High</span>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">💰</div>
-                        <h4>Monetization</h4>
-                        <span class="insight-value">Strong</span>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">🔥</div>
-                        <h4>Engagement</h4>
-                        <span class="insight-value">Excellent</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="result-card">
-                <h2>📊 Story Analytics</h2>
-                <div class="analytics">
-                    <div class="metric">
-                        <span class="metric-label">Estimated Views</span>
-                        <span class="metric-value">2.5M+</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Series Rating</span>
-                        <span class="metric-value">4.8/5</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Completion Rate</span>
-                        <span class="metric-value">87%</span>
-                    </div>
-                </div>
-            </div>
+        <div class="field">
+          <label>💡 Story Premise</label>
+          <textarea id="premise" placeholder="Describe your story idea, main conflict, and key themes…"></textarea>
         </div>
+        <button class="btn-gen" id="generateBtn" onclick="generateStory()">
+          🚀 GENERATE STORY
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">⚙️ Configuration</div>
+        <div class="field">
+          <label>🔢 Number of Episodes</label>
+          <div class="slider-row">
+            <input type="range" id="episodesSlider" min="1" max="10" value="5" oninput="updateSlider(this)">
+            <div class="slider-num" id="epVal">5</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>🎨 Story Tone</label>
+          <select id="tone">
+            <option value="" disabled selected>— Choose a tone —</option>
+            <option value="Dark and Gritty">Dark &amp; Gritty</option>
+            <option value="Light and Humorous">Light &amp; Humorous</option>
+            <option value="Suspenseful">Suspenseful</option>
+            <option value="Heartwarming">Heartwarming</option>
+            <option value="Epic and Grand">Epic &amp; Grand</option>
+            <option value="Mysterious">Mysterious</option>
+            <option value="Romantic">Romantic</option>
+            <option value="Satirical">Satirical</option>
+            <option value="Philosophical">Philosophical</option>
+            <option value="Action-Packed">Action-Packed</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>👥 Target Audience</label>
+          <select id="audience">
+            <option value="" disabled selected>— Choose audience —</option>
+            <option value="Children (6-12)">Children (6–12)</option>
+            <option value="Young Adults (13-17)">Young Adults (13–17)</option>
+            <option value="New Adult (18-25)">New Adult (18–25)</option>
+            <option value="Adult (25+)">Adult (25+)</option>
+            <option value="All Ages">All Ages</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>📺 Platform Style</label>
+          <select id="platform">
+            <option value="" disabled selected>— Choose platform —</option>
+            <option value="Netflix Series">Netflix Series</option>
+            <option value="Webcomic / Manga">Webcomic / Manga</option>
+            <option value="Podcast / Audio Drama">Podcast / Audio Drama</option>
+            <option value="Novel Series">Novel Series</option>
+            <option value="Short Film Series">Short Film Series</option>
+            <option value="Webtoon">Webtoon</option>
+            <option value="YouTube Series">YouTube Series</option>
+            <option value="Instagram Reels">Instagram Reels</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="spinner"></div>
+    <div class="loading-text">Crafting your story<span class="loading-dots"></span></div>
+  </div>
+
+  <div id="output">
+    <div class="success-banner show">🎉 &nbsp; Story Generated Successfully!</div>
+    <button class="btn-reset" onclick="resetForm()">↩ Generate Another Story</button>
+
+    <div class="section card">
+      <div class="section-head"><span class="section-dot"></span> 👥 Characters</div>
+      <div class="chars-grid" id="charsGrid"></div>
     </div>
 
-    <script>
-        // Form handling
-        const form = document.getElementById('storyForm');
-        const spinner = document.getElementById('spinner');
-        const results = document.getElementById('results');
-        const episodesList = document.getElementById('episodesList');
-        const generateBtn = document.querySelector('.generate-btn');
-        const btnText = document.querySelector('.btn-text');
-        const btnLoading = document.querySelector('.btn-loading');
+    <div class="section card">
+      <div class="section-head"><span class="section-dot"></span> 🎬 Episode Outline</div>
+      <div class="ep-list" id="epList"></div>
+    </div>
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+    <div class="section card">
+      <div class="section-head"><span class="section-dot"></span> 🎥 Pilot Episode Summary</div>
+      <div class="pilot-box" id="pilotBox"></div>
+    </div>
 
-            // Show loading state
-            generateBtn.classList.add('loading');
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
+    <div class="section card">
+      <div class="section-head"><span class="section-dot"></span> 💡 Story Insights</div>
+      <div class="insights-grid" id="insightsGrid"></div>
+    </div>
 
-            // Show spinner
-            spinner.style.display = 'block';
-            results.style.display = 'none';
+    <div class="section card">
+      <div class="section-head"><span class="section-dot"></span> 📊 Story Analytics</div>
+      <div class="analytics-grid" id="analyticsGrid"></div>
+    </div>
+  </div>
 
-            // Simulate processing time
-            setTimeout(() => {
-                // Hide spinner
-                spinner.style.display = 'none';
+</div>
 
-                // Generate episodes
-                const episodes = parseInt(document.getElementById('episodes').value);
-                episodesList.innerHTML = '';
+<script>
+function updateSlider(el) {
+  const pct = ((el.value - el.min) / (el.max - el.min)) * 100;
+  el.style.setProperty('--pct', pct + '%');
+  document.getElementById('epVal').textContent = el.value;
+}
+updateSlider(document.getElementById('episodesSlider'));
 
-                const episodeTemplates = [
-                    "🌟 The journey begins with unexpected challenges and new alliances.",
-                    "🎬 Characters face their first major conflict and grow stronger.",
-                    "⚡ Plot twists reveal hidden secrets and change everything.",
-                    "💫 Romantic subplots develop while main conflicts intensify.",
-                    "🔥 The stakes rise as antagonists make their move.",
-                    "🌈 Moments of triumph are followed by devastating setbacks.",
-                    "🎭 Character backstories are revealed through flashbacks.",
-                    "🚀 The story reaches its climax with epic confrontations.",
-                    "✨ Resolutions bring closure while setting up future adventures.",
-                    "🏆 The series concludes with emotional depth and hope.",
-                    "🎪 New characters join as the world expands.",
-                    "🕵️ Mysteries deepen with surprising revelations.",
-                    "❤️ Relationships evolve through trials and tribulations.",
-                    "⚔️ Battles test the limits of courage and friendship.",
-                    "🎨 Creative solutions overcome impossible obstacles.",
-                    "🌟 Dreams become reality through perseverance.",
-                    "🔮 Prophecies and visions guide the characters' path.",
-                    "🎭 Disguises and deception create thrilling moments.",
-                    "💎 Precious discoveries change everything.",
-                    "🎊 Celebrations mask underlying tensions."
-                ];
+function resetForm() {
+  document.getElementById('output').style.display = 'none';
+  document.getElementById('formSection').style.display = 'block';
+  document.getElementById('seriesTitle').value = '';
+  document.getElementById('genre').selectedIndex = 0;
+  document.getElementById('premise').value = '';
+  document.getElementById('tone').selectedIndex = 0;
+  document.getElementById('audience').selectedIndex = 0;
+  document.getElementById('platform').selectedIndex = 0;
+  document.getElementById('episodesSlider').value = 5;
+  updateSlider(document.getElementById('episodesSlider'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-                for (let i = 1; i <= episodes; i++) {
-                    const episodeDiv = document.createElement('div');
-                    episodeDiv.className = 'episode-item';
-                    const template = episodeTemplates[(i - 1) % episodeTemplates.length];
-                    episodeDiv.innerHTML = `
-                        <div class="episode-number">Episode ${i}</div>
-                        <div class="episode-description">${template}</div>
-                    `;
-                    episodesList.appendChild(episodeDiv);
-                }
+function animateIn(selector, delay) {
+  document.querySelectorAll(selector).forEach((el, i) => {
+    setTimeout(() => el.classList.add('show'), i * delay);
+  });
+}
 
-                // Show results
-                results.style.display = 'block';
+function buildOutput(data) {
+  const charsGrid = document.getElementById('charsGrid');
+  charsGrid.innerHTML = '';
+  const charEmojis = ['🧑‍🎨','👫','😈','🧙','🦸','🕵️','👑','🤖'];
+  (data.characters || []).forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'char-card';
+    div.innerHTML = `<span class="char-emoji">${charEmojis[i % charEmojis.length]}</span>
+      <div class="char-name">${c.name}</div>
+      <div class="char-desc">${c.description}</div>`;
+    charsGrid.appendChild(div);
+  });
 
-                // Reset button
-                generateBtn.classList.remove('loading');
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
+  const epList = document.getElementById('epList');
+  epList.innerHTML = '';
+  const epIcons = ['🌅','⚡','🔀','💞','🎯','🌪️','🔥','💀','🌟','🏆'];
+  (data.episodes || []).forEach((ep, i) => {
+    const div = document.createElement('div');
+    div.className = 'ep-item';
+    div.innerHTML = `<div class="ep-badge">Ep ${ep.number}</div>
+      <div>
+        <div class="ep-title-txt">${epIcons[i % epIcons.length]} ${ep.title}</div>
+        <div class="ep-summary-txt">${ep.summary}</div>
+      </div>`;
+    epList.appendChild(div);
+  });
 
-                // Scroll to results
-                results.scrollIntoView({ behavior: 'smooth' });
-            }, 3000);
-        });
+  const pilotBox = document.getElementById('pilotBox');
+  pilotBox.innerHTML = '';
+  (data.pilotSummary || []).forEach(para => {
+    const div = document.createElement('div');
+    div.className = 'pilot-para';
+    div.textContent = para;
+    pilotBox.appendChild(div);
+  });
 
-        // Add some interactive effects
-        document.querySelectorAll('.character-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        document.querySelectorAll('.insight-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-    </script>
-</body>
-</html>
+  const insightsGrid = document.getElementById('insightsGrid');
+  insightsGrid.innerHTML = '';
+  const ins = data.insights || {};
+  const insightMeta = [
+    { icon:'📊', label:'Genre Fit',       key:'genreFit',       cls:'c-teal'   },
+    { icon:'🎯', label:'Audience Appeal', key:'audienceAppeal', cls:'c-blue'   },
+    { icon:'⏱️', label:'Episode Length',  k
